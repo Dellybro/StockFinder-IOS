@@ -43,7 +43,7 @@
 
 -(void)resetFields{
     _companyStockLogo.text = nil;
-    _data_source.text = nil;
+    _data_source.text = @"EOD";
     _startDate.text = nil;
     NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
     [DateFormatter setDateFormat:@"yyyy-MM-dd"];
