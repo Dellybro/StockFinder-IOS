@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "TopRated.h"
 #import "SearchPage.h"
+#import "WatchList.h"
 
 @interface HomePage : UITabBarController
 
+@property WatchList *watchList;
 @property TopRated *TopTen;
 @property SearchPage *search;
-@property UIViewController *view3;
 
 @end

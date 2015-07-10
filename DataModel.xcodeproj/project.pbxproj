@@ -118,6 +118,8 @@
 				9DDD88871B4B1A7C00A50643 /* Supporting Files */,
 				9DDD88CF1B4CFBE000A50643 /* DescriptionForRowPage.h */,
 				9DDD88D01B4CFBE000A50643 /* DescriptionForRowPage.m */,
+				9DA45E991B4EF4E100E8E892 /* HomePage.h */,
+				9DA45E9A1B4EF4E100E8E892 /* HomePage.m */,
 				9DDD88BE1B4CC5B800A50643 /* SearchPage.h */,
 				9DDD88BF1B4CC5B800A50643 /* SearchPage.m */,
 				9DDD88C31B4CF16100A50643 /* ShowCaseTableView.h */,
@@ -162,8 +164,6 @@
 				9DDD88BC1B4CC46F00A50643 /* HTTPHelper.m */,
 				9DDD88B01B4B449400A50643 /* CustomGUI.h */,
 				9DDD88B11B4B449400A50643 /* CustomGUI.m */,
-				9DA45E991B4EF4E100E8E892 /* HomePage.h */,
-				9DA45E9A1B4EF4E100E8E892 /* HomePage.m */,
 			);
 			name = models;
 			sourceTree = "<group>";

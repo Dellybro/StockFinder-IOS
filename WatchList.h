@@ -12,4 +12,6 @@
 
 @property UIBarButtonItem* addCompany;
 
+@property UILabel *header;
+
 @end
