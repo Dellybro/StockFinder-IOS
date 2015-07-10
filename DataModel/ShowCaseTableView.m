@@ -15,6 +15,7 @@
 @interface ShowCaseTableView ()
 @property AppDelegate *sharedDelegate;
 @property CustomGUI *customGUI;
+@property (strong, nonatomic) UISearchController *searchController;
 
 @end
 
@@ -26,6 +27,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _ShownData = (NSMutableArray*)_theData;
+    
     _sharedDelegate = [[UIApplication sharedApplication] delegate];
     _customGUI = [[CustomGUI alloc] init];
     _meaningforRow = [[NSMutableArray alloc] init];
@@ -46,36 +49,49 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return _data.count;
+    return _ShownData.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[_data objectAtIndex:section] count]-1;
+    return [[_ShownData objectAtIndex:section] count]-1;
 }
 -(void)setup{
-    //Header and stuff
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 75)];
-    _header = [_customGUI defaultLabel:_nameOfCompany];
-    _header.textColor = [UIColor whiteColor];
-    _header.frame = CGRectMake(0, 10, self.view.frame.size.width, 35);
-    _header.adjustsFontSizeToFitWidth = YES;
-    
-    headerView.backgroundColor = [UIColor blackColor];
-    [headerView addSubview:_header];
-    self.tableView.tableHeaderView = headerView;
     
     
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.searchBar.delegate = self;
+    [self.searchController.searchBar sizeToFit];
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+    
+    
+}
+- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
+{
+    [self updateSearchResultsForSearchController:self.searchController];
+}
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+    NSString *searchString = searchController.searchBar.text;
+    
+    if(searchString.length != 0){
+        _ShownData = [[NSMutableArray alloc] init];
+        for (int x = 0; x < _theData.count; x++) {
+            if([[[_theData objectAtIndex:x] objectAtIndex:0] containsString:searchString]){
+                [_ShownData addObject:[_theData objectAtIndex:x]];
+            }
+        }
+    } else {
+        _ShownData = (NSMutableArray*)_theData;
+    }
+    [self.tableView reloadData];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
     StaticCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
-        
         cell = [[StaticCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
-        
     }
     
     if(indexPath.row % 2 == 0){
@@ -84,7 +100,7 @@
         cell.backgroundColor = [UIColor grayColor];
     }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@",[[_data objectAtIndex:indexPath.section] objectAtIndex:indexPath.row+1]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",[[_ShownData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row+1]];
     cell.meaningForRow = [_meaningforRow objectAtIndex:indexPath.row];
     return cell;
 }
@@ -97,7 +113,8 @@
     [_sharedDelegate.navController pushViewController:descriptionPage animated:YES];
 }
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return [[_data objectAtIndex:section] objectAtIndex:0];
+    
+    return [[_ShownData objectAtIndex:section] objectAtIndex:0];
 }
 
 @end

@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShowCaseTableView : UITableViewController
+@interface ShowCaseTableView : UITableViewController <UISearchResultsUpdating, UISearchBarDelegate>
 
-@property NSMutableArray *data;
+@property NSArray *theData;
+
+
 @property NSString *nameOfCompany;
+
+@property NSMutableArray *ShownData;
 
 @property NSMutableArray* meaningforRow;
 

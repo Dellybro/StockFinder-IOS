@@ -85,7 +85,7 @@
     
     ShowCaseTableView *showPage = [[ShowCaseTableView alloc] init];
     showPage.nameOfCompany = cell.companyForCell.StockLOGO;
-    showPage.data = data;
+    showPage.theData = data;
     
     [_sharedDelegate.navController pushViewController:showPage animated:YES];
     

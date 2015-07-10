@@ -138,7 +138,7 @@
 }
 -(void)gotoResults:(UIButton*)sender{
     ShowCaseTableView *searchResults = [[ShowCaseTableView alloc] init];
-    searchResults.data = _data;
+    searchResults.theData = _data;
     searchResults.nameOfCompany = _companyStockLogo.text;
     [_sharedDelegate.navController pushViewController:searchResults animated:YES];
 }

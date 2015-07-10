@@ -75,7 +75,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     StaticCell *cell = (StaticCell*)[self.tableView cellForRowAtIndexPath:indexPath];
     ShowCaseTableView *page = [[ShowCaseTableView alloc] init];
-    page.data = cell.CompanyDetails;
+    page.theData = cell.CompanyDetails;
     page.nameOfCompany = [_sharedDelegate.topTenNames objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:page animated:YES];
     
