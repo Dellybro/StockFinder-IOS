@@ -29,7 +29,7 @@
     
     
     for (int x = 0; x < _topTenNames.count; x++) {
-        NSMutableArray *companyInfo = [self.helper find_company:@"EOD" for:[_topTenNames objectAtIndex:x] startDate:@"2015-06-01" endDate:@"2015-07-08"];
+        NSMutableArray *companyInfo = [self.helper find_company:@"WIKI" for:[_topTenNames objectAtIndex:x] startDate:@"2015-06-01" endDate:@"2015-07-08"];
         if(companyInfo.count > 2){
             [_topTen addObject:companyInfo];
         } else {

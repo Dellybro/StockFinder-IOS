@@ -43,7 +43,7 @@
 
 -(void)resetFields{
     _companyStockLogo.text = nil;
-    _data_source.text = @"EOD";
+    _data_source.text = @"WIKI";
     _startDate.text = nil;
     NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
     [DateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -64,7 +64,7 @@
     _hint2.frame = CGRectMake(0, 115, self.view.frame.size.width, 25);
     _hint2.adjustsFontSizeToFitWidth = YES;
     
-    _data_source = [_customGUI defaultTextFieldWithText:@"EOD"];
+    _data_source = [_customGUI defaultTextFieldWithText:@"WIKI"];
     _data_source.frame = CGRectMake(70, 150, self.view.frame.size.width-140, 30);
     
     _companyStockLogo = [_customGUI defaultTextField:@"Company Stock Name"];
@@ -103,25 +103,34 @@
     _companyStockLogo.text = _companyStockLogo.text.uppercaseString;
     _data = [_sharedDelegate.helper find_company:_data_source.text for:_companyStockLogo.text startDate:_startDate.text endDate:_endDate.text];
     NSLog(@"%@", _data);
-    if (_data.count > 1){
-        _found = [_customGUI standardButton:[NSString stringWithFormat:@"Found: %@ click here", _companyStockLogo.text]];
-        [_found addTarget:self action:@selector(gotoResults:) forControlEvents:UIControlEventTouchUpInside];
-        _found.titleLabel.font = [UIFont fontWithName:@"Copperplate-Bold" size:16];
-        _found.frame = CGRectMake(30, 400, self.view.frame.size.width-60, 30);
-        
-        _addToWatchList = [_customGUI standardButton:@"Add to Watch list"];
-        [_addToWatchList addTarget:self action:@selector(addToWatch:) forControlEvents:UIControlEventTouchUpInside];
-        _addToWatchList.titleLabel.font = [UIFont fontWithName:@"Copperplate-Bold" size:16];
-        _addToWatchList.frame = CGRectMake(30, 450, self.view.frame.size.width-60, 30);
-        
-        [self.view addSubview:_addToWatchList];
-        [self.view addSubview:_found];
+    if(_data.count != 0){
+            if ([[_data objectAtIndex:0] superclass] != [NSMutableString class]){
+                _found = [_customGUI standardButton:[NSString stringWithFormat:@"Found: %@ click here", _companyStockLogo.text]];
+                [_found addTarget:self action:@selector(gotoResults:) forControlEvents:UIControlEventTouchUpInside];
+                _found.titleLabel.font = [UIFont fontWithName:@"Copperplate-Bold" size:16];
+                _found.frame = CGRectMake(30, 400, self.view.frame.size.width-60, 30);
+                
+                _addToWatchList = [_customGUI standardButton:@"Add to Watch list"];
+                [_addToWatchList addTarget:self action:@selector(addToWatch:) forControlEvents:UIControlEventTouchUpInside];
+                _addToWatchList.titleLabel.font = [UIFont fontWithName:@"Copperplate-Bold" size:16];
+                _addToWatchList.frame = CGRectMake(30, 450, self.view.frame.size.width-60, 30);
+                
+                [self.view addSubview:_addToWatchList];
+                [self.view addSubview:_found];
+            } else {
+                [self removeFoundAndWatch];
+            }
     } else {
-        _found = [_customGUI standardButton:@"Not Found"];
-        _found.frame = CGRectMake(50, 400, self.view.frame.size.width-100, 30);
-        [self.view addSubview:_found];
+        [self removeFoundAndWatch];
         
     }
+}
+-(void)removeFoundAndWatch{
+    _found = [_customGUI standardButton:@"Not Found"];
+    _found.frame = CGRectMake(50, 400, self.view.frame.size.width-100, 30);
+    _addToWatchList = nil;
+    [self.addToWatchList removeFromSuperview];
+    [self.view addSubview:_found];
 }
 -(void)addToWatch:(UIButton*)sender{
     Company *foundCompany = [[Company alloc] init];
