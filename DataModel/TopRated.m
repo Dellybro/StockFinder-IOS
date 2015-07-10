@@ -23,6 +23,10 @@
 
 @implementation TopRated
 
+-(void)viewDidAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = YES;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

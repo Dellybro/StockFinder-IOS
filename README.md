@@ -1,3 +1,6 @@
 # ParsingStockData
 
-Currently does not have any way to save data, I plan to add NSUserdefaults in the future.
+NSUser Defaults are setup so that they can save stocks to your watchlist, and than you can delete all stocks.
+
+
+Will be implementing delete stock at highlighted row. Just Wait!!

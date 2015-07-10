@@ -21,6 +21,10 @@
 
 @implementation SearchPage
 
+-(void)viewDidAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = YES;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -37,7 +41,15 @@
 }
 
 
-
+-(void)resetFields{
+    _companyStockLogo.text = nil;
+    _exchangeName.text = nil;
+    _startDate.text = nil;
+    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+    [DateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString* todaysDate = [DateFormatter stringFromDate:[NSDate date]];
+    _endDate.text = todaysDate;
+}
 -(void)setup{
     _pageTitle = [_customGUI defaultLabel:@"Search"];
     _pageTitle.frame = CGRectMake(0, 80, self.view.frame.size.width, 40);
@@ -86,7 +98,6 @@
     _data = [_sharedDelegate.helper find_companyTOPTEN:_exchangeName.text for:_companyStockLogo.text startDate:_startDate.text endDate:_endDate.text];
     NSLog(@"%@", _data);
     if (_data.count > 1){
-        
         _found = [_customGUI standardButton:[NSString stringWithFormat:@"Found: %@ click here", _companyStockLogo.text]];
         [_found addTarget:self action:@selector(gotoResults:) forControlEvents:UIControlEventTouchUpInside];
         _found.titleLabel.font = [UIFont fontWithName:@"Copperplate-Bold" size:16];
@@ -112,9 +123,10 @@
     foundCompany.StockExchange = _exchangeName.text;
     foundCompany.startDate = _startDate.text;
     foundCompany.endDate = _endDate.text;
-    [_sharedDelegate.watchList addObject:foundCompany];
     
-    [self alert:@"Added" with:_companyStockLogo.text buttonAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [_sharedDelegate saveUserStocklist:foundCompany];
+    
+    [self alert:@"Added" with:_companyStockLogo.text buttonAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {[self resetFields];}]];
 }
 -(void)alert:(NSString*)alertTitle with:(NSString*)alertMessage buttonAction:(UIAlertAction*)button{
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:alertTitle

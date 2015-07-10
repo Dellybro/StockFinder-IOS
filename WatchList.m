@@ -21,6 +21,10 @@
 
 @implementation WatchList
 
+-(void)viewDidAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = NO;
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [self.tableView reloadData];
 }
@@ -44,7 +48,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _sharedDelegate.watchList.count;
+    return _sharedDelegate.userWatchList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -69,7 +73,7 @@
         cell.state.text = @"RISK!";
         cell.state.textColor = [UIColor orangeColor];
     }
-    cell.companyForCell = [_sharedDelegate.watchList objectAtIndex:indexPath.row];
+    cell.companyForCell = [[Company alloc] initWithDict:[_sharedDelegate.userWatchList objectAtIndex:indexPath.row]];
     cell.textLabel.text = cell.companyForCell.StockLOGO;
     cell.detailTextLabel.text = cell.companyForCell.StockExchange;
     

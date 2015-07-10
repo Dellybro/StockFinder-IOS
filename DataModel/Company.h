@@ -15,4 +15,7 @@
 @property NSString* startDate;
 @property NSString* endDate;
 
+-(NSMutableDictionary*)toDict;
+-(id)initWithDict:(NSMutableDictionary*)dict;
+
 @end
