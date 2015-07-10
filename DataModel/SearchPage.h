@@ -12,13 +12,14 @@
 
 @property UILabel *pageTitle;
 
-@property UITextField *exchangeName;
+@property UITextField *data_source;
 @property UITextField *companyStockLogo;
 
 @property UITextField *startDate;
 @property UITextField *endDate;
 
 @property UILabel *hint;
+@property UILabel *hint2;
 
 @property UIButton *searchButton;
 @property UIButton *found;

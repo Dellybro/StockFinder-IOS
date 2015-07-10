@@ -70,7 +70,7 @@
     self.navigationItem.rightBarButtonItem = nil;
 }
 -(void)setupSearch{
-    _search.view.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:141.0f/255.0f blue:71.0f/255.0f alpha:1];
+    _search.view.backgroundColor = [UIColor colorWithRed:100.0f/255.0f green:141.0f/255.0f blue:197.0f/255.0f alpha:1];
     self.navigationItem.rightBarButtonItem = nil;
 }
 -(void)setupWatchList{

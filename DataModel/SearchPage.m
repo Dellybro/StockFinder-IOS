@@ -43,7 +43,7 @@
 
 -(void)resetFields{
     _companyStockLogo.text = nil;
-    _exchangeName.text = nil;
+    _data_source.text = nil;
     _startDate.text = nil;
     NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
     [DateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -52,15 +52,20 @@
 }
 -(void)setup{
     _pageTitle = [_customGUI defaultLabel:@"Search"];
-    _pageTitle.frame = CGRectMake(0, 80, self.view.frame.size.width, 40);
+    _pageTitle.frame = CGRectMake(0, 50, self.view.frame.size.width, 40);
     
     _hint = [_customGUI defaultLabel:@"Not case sensitive"];
     _hint.textColor = [UIColor lightGrayColor];
-    _hint.frame = CGRectMake(100, 120, self.view.frame.size.width-200, 15);
+    _hint.frame = CGRectMake(100, 97, self.view.frame.size.width-200, 15);
     _hint.adjustsFontSizeToFitWidth = YES;
     
-    _exchangeName = [_customGUI defaultTextField:@"Exchange Name"];
-    _exchangeName.frame = CGRectMake(70, 150, self.view.frame.size.width-140, 30);
+    _hint2 = [_customGUI defaultLabel:@"Warning change data source on own terms"];
+    _hint2.textColor = [UIColor lightGrayColor];
+    _hint2.frame = CGRectMake(0, 115, self.view.frame.size.width, 25);
+    _hint2.adjustsFontSizeToFitWidth = YES;
+    
+    _data_source = [_customGUI defaultTextFieldWithText:@"EOD"];
+    _data_source.frame = CGRectMake(70, 150, self.view.frame.size.width-140, 30);
     
     _companyStockLogo = [_customGUI defaultTextField:@"Company Stock Name"];
     _companyStockLogo.frame = CGRectMake(70, 200, self.view.frame.size.width-140, 30);
@@ -79,10 +84,11 @@
     _searchButton.frame = CGRectMake(100, 350, self.view.frame.size.width-200, 30);
     [_searchButton addTarget:self action:@selector(searchResult:) forControlEvents:UIControlEventTouchUpInside];
     
+    [self.view addSubview:_hint2];
     [self.view addSubview:_hint];
     [self.view addSubview:_startDate];
     [self.view addSubview:_endDate];
-    [self.view addSubview:_exchangeName];
+    [self.view addSubview:_data_source];
     [self.view addSubview:_companyStockLogo];
     [self.view addSubview:_searchButton];
     [self.view addSubview:_pageTitle];
@@ -93,9 +99,9 @@
         [_found removeFromSuperview];
     }
     
-    _exchangeName.text = _exchangeName.text.uppercaseString;
+    _data_source.text = _data_source.text.uppercaseString;
     _companyStockLogo.text = _companyStockLogo.text.uppercaseString;
-    _data = [_sharedDelegate.helper find_company:_exchangeName.text for:_companyStockLogo.text startDate:_startDate.text endDate:_endDate.text];
+    _data = [_sharedDelegate.helper find_company:_data_source.text for:_companyStockLogo.text startDate:_startDate.text endDate:_endDate.text];
     NSLog(@"%@", _data);
     if (_data.count > 1){
         _found = [_customGUI standardButton:[NSString stringWithFormat:@"Found: %@ click here", _companyStockLogo.text]];
@@ -120,7 +126,7 @@
 -(void)addToWatch:(UIButton*)sender{
     Company *foundCompany = [[Company alloc] init];
     foundCompany.StockLOGO = _companyStockLogo.text;
-    foundCompany.StockExchange = _exchangeName.text;
+    foundCompany.StockExchange = _data_source.text;
     foundCompany.startDate = _startDate.text;
     foundCompany.endDate = _endDate.text;
     
