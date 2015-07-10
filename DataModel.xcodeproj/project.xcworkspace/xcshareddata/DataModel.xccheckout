@@ -7,34 +7,34 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>A81BF157-CE05-40D7-AA68-195D7E5088C2</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>DataModel</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>4D724F74148FC9C8F8E0942DF5B0149757A9A891</key>
-		<string>https://github.com/Dellybro/RailsAPI-IOS-2.git</string>
+		<key>0A100926492F9D5D2C4AF7A64457DF8448E44439</key>
+		<string>https://github.com/Dellybro/ParsingStockData.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>DataModel/DataModel.xcodeproj/project.xcworkspace</string>
+	<string>DataModel.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>4D724F74148FC9C8F8E0942DF5B0149757A9A891</key>
-		<string>../../..</string>
+		<key>0A100926492F9D5D2C4AF7A64457DF8448E44439</key>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/Dellybro/RailsAPI-IOS-2.git</string>
+	<string>https://github.com/Dellybro/ParsingStockData.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>4D724F74148FC9C8F8E0942DF5B0149757A9A891</string>
+	<string>0A100926492F9D5D2C4AF7A64457DF8448E44439</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4D724F74148FC9C8F8E0942DF5B0149757A9A891</string>
+			<string>0A100926492F9D5D2C4AF7A64457DF8448E44439</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Haggle</string>
+			<string>DataModel</string>
 		</dict>
 	</array>
 </dict>

@@ -47,7 +47,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[_data objectAtIndex:section] count];
+    return [[_data objectAtIndex:section] count]-1;
 }
 -(void)setup{
     //Header and stuff
@@ -67,6 +67,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    
     StaticCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
         
@@ -80,7 +81,7 @@
         cell.backgroundColor = [UIColor grayColor];
     }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@",[[_data objectAtIndex:indexPath.section] objectAtIndex:indexPath.row]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",[[_data objectAtIndex:indexPath.section] objectAtIndex:indexPath.row+1]];
     cell.meaningForRow = [_meaningforRow objectAtIndex:indexPath.row];
     return cell;
 }
