@@ -20,6 +20,9 @@
 
 @implementation ShowCaseTableView{
 }
+-(void)viewDidAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = NO;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

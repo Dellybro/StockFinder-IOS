@@ -61,7 +61,7 @@
     }
     
     
-    cell.CompanyName = [_sharedDelegate.topTenNames objectAtIndex:indexPath.row];
+    //cell.CompanyName = [_sharedDelegate.topTenNames objectAtIndex:indexPath.row];
     cell.CompanyDetails = [_sharedDelegate.topTen objectAtIndex:indexPath.row];
     if(indexPath.row % 2 == 0){
         cell.backgroundColor = [UIColor darkGrayColor];
@@ -76,7 +76,7 @@
     StaticCell *cell = (StaticCell*)[self.tableView cellForRowAtIndexPath:indexPath];
     ShowCaseTableView *page = [[ShowCaseTableView alloc] init];
     page.data = cell.CompanyDetails;
-    page.nameOfCompany = cell.CompanyName;
+    page.nameOfCompany = [_sharedDelegate.topTenNames objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:page animated:YES];
     
 }

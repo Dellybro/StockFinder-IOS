@@ -19,24 +19,24 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    _topTenNames = [NSMutableArray arrayWithObjects:@"AAPL", @"RAI", @"EHTH", @"VSAR", @"CFI", @"ABG", @"TCP", nil];
+    _topTenNames = [NSMutableArray arrayWithObjects:@"AAPL", @"RAI", @"EHTH", @"VSAR", @"CFI", @"ABG", @"ARRS", @"ARW", @"HCC", @"ASNA", nil];
     _topTen = [[NSMutableArray alloc] init];
     _userWatchList = [[NSMutableArray alloc] init];
     [self getUserStocklist];
     //[self deleteAllObjects:@"User"];
     //[self saveUserStocklist];
-    
     _helper = [[HTTPHelper alloc] init];
     
+    
     for (int x = 0; x < _topTenNames.count; x++) {
-        NSMutableArray *companyInfo = [self.helper find_companyTOPTEN:@"WIKI" for:[_topTenNames objectAtIndex:x] startDate:@"2015-07-01" endDate:@"2015-07-08"];
+        NSMutableArray *companyInfo = [self.helper find_companyTOPTEN:@"WIKI" for:[_topTenNames objectAtIndex:x] startDate:@"2015-06-01" endDate:@"2015-07-08"];
         if(companyInfo.count > 2){
             [_topTen addObject:companyInfo];
+        } else {
+            NSLog(@"not found");
         }
     }
     
-    
-    NSLog(@"%@, %lu", _userWatchList, (unsigned long)_userWatchList.count);
     
     _rootView = [[HomePage alloc] init];
     _topController = [[TopRated alloc] init];
@@ -89,6 +89,29 @@
     }
     
 }
+//-(void)updateDatesOfEndDateToToday{
+//    //Today Date
+//    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+//    [DateFormatter setDateFormat:@"yyyy-MM-dd"];
+//    NSString* todaysDate = [DateFormatter stringFromDate:[NSDate date]];
+//    //Start
+//    NSManagedObjectContext *context = [self managedObjectContext];
+//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User"
+//                                              inManagedObjectContext:context];
+//    NSError *error;
+//    [fetchRequest setEntity:entity];
+//    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+//    
+//    int index = 0;
+//    for (NSManagedObject *info in fetchedObjects) {
+//        NSMutableDictionary* stock = [info valueForKey:@"stocks"];
+//        [stock setValue:todaysDate forKey:@"endDate"];
+//        NSManagedObject* updatedStock = [fetchedObjects objectAtIndex:index];
+//        [_userWatchList addObject:[info valueForKey:@"stocks"]];
+//        index++;
+//    }
+//}
 -(void)getUserStocklist{
     NSManagedObjectContext *context = [self managedObjectContext];
     
