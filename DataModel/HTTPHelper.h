@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface HTTPHelper : NSObject
--(NSMutableArray*)find_companyTOPTEN:(NSString*)exchangeName for:(NSString*)company startDate:(NSString*)start endDate:(NSString*)endDate;
-    
+-(NSMutableArray*)find_company:(NSString*)exchangeName for:(NSString*)company startDate:(NSString*)start endDate:(NSString*)endDate;
+
 @end

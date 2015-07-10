@@ -81,7 +81,7 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     StaticCell *cell = (StaticCell*)[self.tableView cellForRowAtIndexPath:indexPath];
-    NSMutableArray *data = [_sharedDelegate.helper find_companyTOPTEN:cell.companyForCell.StockExchange for:cell.companyForCell.StockLOGO startDate:cell.companyForCell.startDate endDate:cell.companyForCell.endDate];
+    NSMutableArray *data = [_sharedDelegate.helper find_company:cell.companyForCell.StockExchange for:cell.companyForCell.StockLOGO startDate:cell.companyForCell.startDate endDate:cell.companyForCell.endDate];
     
     ShowCaseTableView *showPage = [[ShowCaseTableView alloc] init];
     showPage.nameOfCompany = cell.companyForCell.StockLOGO;

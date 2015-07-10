@@ -29,15 +29,13 @@
     
     
     for (int x = 0; x < _topTenNames.count; x++) {
-        NSMutableArray *companyInfo = [self.helper find_companyTOPTEN:@"WIKI" for:[_topTenNames objectAtIndex:x] startDate:@"2015-06-01" endDate:@"2015-07-08"];
+        NSMutableArray *companyInfo = [self.helper find_company:@"EOD" for:[_topTenNames objectAtIndex:x] startDate:@"2015-06-01" endDate:@"2015-07-08"];
         if(companyInfo.count > 2){
             [_topTen addObject:companyInfo];
         } else {
             NSLog(@"not found");
         }
     }
-    
-    
     _rootView = [[HomePage alloc] init];
     _topController = [[TopRated alloc] init];
     _navController = [[UINavigationController alloc] initWithRootViewController:_rootView];

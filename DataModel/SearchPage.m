@@ -95,7 +95,7 @@
     
     _exchangeName.text = _exchangeName.text.uppercaseString;
     _companyStockLogo.text = _companyStockLogo.text.uppercaseString;
-    _data = [_sharedDelegate.helper find_companyTOPTEN:_exchangeName.text for:_companyStockLogo.text startDate:_startDate.text endDate:_endDate.text];
+    _data = [_sharedDelegate.helper find_company:_exchangeName.text for:_companyStockLogo.text startDate:_startDate.text endDate:_endDate.text];
     NSLog(@"%@", _data);
     if (_data.count > 1){
         _found = [_customGUI standardButton:[NSString stringWithFormat:@"Found: %@ click here", _companyStockLogo.text]];

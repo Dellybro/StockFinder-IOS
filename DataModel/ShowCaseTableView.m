@@ -60,18 +60,13 @@
     
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
-    self.searchController.searchBar.delegate = self;
     [self.searchController.searchBar sizeToFit];
+    self.searchController.searchBar.placeholder = @"Search by date";
     self.tableView.tableHeaderView = self.searchController.searchBar;
     
     
 }
-- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
-{
-    [self updateSearchResultsForSearchController:self.searchController];
-}
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
-{
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController{
     NSString *searchString = searchController.searchBar.text;
     
     if(searchString.length != 0){

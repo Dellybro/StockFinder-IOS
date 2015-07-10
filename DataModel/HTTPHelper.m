@@ -10,7 +10,7 @@
 
 @implementation HTTPHelper
 
--(NSMutableArray*)find_companyTOPTEN:(NSString*)exchangeName for:(NSString*)company startDate:(NSString*)start endDate:(NSString*)endDate{
+-(NSMutableArray*)find_company:(NSString*)exchangeName for:(NSString*)company startDate:(NSString*)start endDate:(NSString*)endDate{
     
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.quandl.com/api/v1/datasets/%@/%@.json?trim_start=%@&trim_end=%@&auth_token=RggaXWEcfyebq2wNZHSB", exchangeName, company, start, endDate]];

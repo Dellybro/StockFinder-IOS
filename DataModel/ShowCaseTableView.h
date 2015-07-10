@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShowCaseTableView : UITableViewController <UISearchResultsUpdating, UISearchBarDelegate>
+@interface ShowCaseTableView : UITableViewController <UISearchResultsUpdating>
 
 @property NSArray *theData;
 
