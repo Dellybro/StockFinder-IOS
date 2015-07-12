@@ -12,6 +12,7 @@
 
 @property NSArray *theData;
 
+@property NSMutableArray *titlesOfRow;
 
 @property NSString *nameOfCompany;
 

@@ -23,13 +23,15 @@
     _topTen = [[NSMutableArray alloc] init];
     _userWatchList = [[NSMutableArray alloc] init];
     [self getUserStocklist];
-    //[self deleteAllObjects:@"User"];
-    //[self saveUserStocklist];
     _helper = [[HTTPHelper alloc] init];
     
-    
+    //Date Formatter
+    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+    [DateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString* todaysDate = [DateFormatter stringFromDate:[NSDate date]];
     for (int x = 0; x < _topTenNames.count; x++) {
-        NSMutableArray *companyInfo = [self.helper find_company:@"WIKI" for:[_topTenNames objectAtIndex:x] startDate:@"2015-06-01" endDate:@"2015-07-08"];
+        
+        NSMutableArray *companyInfo = [self.helper find_company:@"WIKI" for:[_topTenNames objectAtIndex:x] startDate:@"2015-06-01" endDate:todaysDate];
         if(companyInfo.count > 2){
             [_topTen addObject:companyInfo];
         } else {

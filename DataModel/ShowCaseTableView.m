@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _ShownData = (NSMutableArray*)_theData;
-    
+    _titlesOfRow = [[NSMutableArray alloc] initWithObjects:@"Open", @"High", @"Low", @"Close", @"Volume", @"Dividends", @"DPC", @"Open", @"High", @"Low", @"Close", @"Volume", nil];
     _sharedDelegate = [[UIApplication sharedApplication] delegate];
     _customGUI = [[CustomGUI alloc] init];
     _meaningforRow = [[NSMutableArray alloc] init];
@@ -53,10 +53,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[_ShownData objectAtIndex:section] count]-1;
+    return [[_ShownData objectAtIndex:section] count]/2+1;
 }
 -(void)setup{
     
+    self.navigationItem.title = _nameOfCompany;
     
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
@@ -95,7 +96,7 @@
         cell.backgroundColor = [UIColor grayColor];
     }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@",[[_ShownData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row+1]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", [_titlesOfRow objectAtIndex:indexPath.row],[[_ShownData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row+1]];
     cell.meaningForRow = [_meaningforRow objectAtIndex:indexPath.row];
     return cell;
 }
