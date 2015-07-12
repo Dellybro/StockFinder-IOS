@@ -8,14 +8,13 @@
 
 #import "SearchPage.h"
 #import "AppDelegate.h"
-#import "CustomGUI.h"
 #import "ShowCaseTableView.h"
-#import "Company.h"
 
 @interface SearchPage ()
 
 @property AppDelegate *sharedDelegate;
-@property CustomGUI *customGUI;
+@property float vspacing;
+@property float hspacing;
 
 @end
 
@@ -29,7 +28,6 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     _sharedDelegate = [[UIApplication sharedApplication] delegate];
-    _customGUI = [[CustomGUI alloc] init];
     
     [self setup];
     // Do any additional setup after loading the view.
@@ -50,50 +48,6 @@
     NSString* todaysDate = [DateFormatter stringFromDate:[NSDate date]];
     _endDate.text = todaysDate;
 }
--(void)setup{
-    _pageTitle = [_customGUI defaultLabel:@"Search"];
-    _pageTitle.frame = CGRectMake(0, 50, self.view.frame.size.width, 40);
-    
-    _hint = [_customGUI defaultLabel:@"Not case sensitive"];
-    _hint.textColor = [UIColor lightGrayColor];
-    _hint.frame = CGRectMake(100, 97, self.view.frame.size.width-200, 15);
-    _hint.adjustsFontSizeToFitWidth = YES;
-    
-    _hint2 = [_customGUI defaultLabel:@"Warning change data source on own terms"];
-    _hint2.textColor = [UIColor lightGrayColor];
-    _hint2.frame = CGRectMake(0, 115, self.view.frame.size.width, 25);
-    _hint2.adjustsFontSizeToFitWidth = YES;
-    
-    _data_source = [_customGUI defaultTextFieldWithText:@"WIKI"];
-    _data_source.frame = CGRectMake(70, 150, self.view.frame.size.width-140, 30);
-    
-    _companyStockLogo = [_customGUI defaultTextField:@"Company Stock Name"];
-    _companyStockLogo.frame = CGRectMake(70, 200, self.view.frame.size.width-140, 30);
-    
-    _startDate = [_customGUI defaultTextField:@"Start Date"];
-    _startDate.frame = CGRectMake(70, 250, self.view.frame.size.width-140, 30);
-    
-    
-    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
-    [DateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSString* todaysDate = [DateFormatter stringFromDate:[NSDate date]];
-    _endDate = [_customGUI defaultTextFieldWithText:todaysDate];
-    _endDate.frame = CGRectMake(70, 300, self.view.frame.size.width-140, 30);
-    
-    _searchButton = [_customGUI defaultButton:@"search"];
-    _searchButton.frame = CGRectMake(100, 350, self.view.frame.size.width-200, 30);
-    [_searchButton addTarget:self action:@selector(searchResult:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:_hint2];
-    [self.view addSubview:_hint];
-    [self.view addSubview:_startDate];
-    [self.view addSubview:_endDate];
-    [self.view addSubview:_data_source];
-    [self.view addSubview:_companyStockLogo];
-    [self.view addSubview:_searchButton];
-    [self.view addSubview:_pageTitle];
-    
-}
 -(void)searchResult:(UIButton*)sender{
     if([_found superview]){
         [_found removeFromSuperview];
@@ -105,12 +59,12 @@
     NSLog(@"%@", _data);
     if(_data.count != 0){
             if ([[_data objectAtIndex:0] superclass] != [NSMutableString class]){
-                _found = [_customGUI standardButton:[NSString stringWithFormat:@"Found: %@ click here", _companyStockLogo.text]];
+                _found = [[_sharedDelegate customGUI] standardButton:[NSString stringWithFormat:@"Found: %@ click here", _companyStockLogo.text]];
                 [_found addTarget:self action:@selector(gotoResults:) forControlEvents:UIControlEventTouchUpInside];
                 _found.titleLabel.font = [UIFont fontWithName:@"Copperplate-Bold" size:16];
                 _found.frame = CGRectMake(30, 400, self.view.frame.size.width-60, 30);
                 
-                _addToWatchList = [_customGUI standardButton:@"Add to Watch list"];
+                _addToWatchList = [[_sharedDelegate customGUI] standardButton:@"Add to Watch list"];
                 [_addToWatchList addTarget:self action:@selector(addToWatch:) forControlEvents:UIControlEventTouchUpInside];
                 _addToWatchList.titleLabel.font = [UIFont fontWithName:@"Copperplate-Bold" size:16];
                 _addToWatchList.frame = CGRectMake(30, 450, self.view.frame.size.width-60, 30);
@@ -126,7 +80,7 @@
     }
 }
 -(void)removeFoundAndWatch{
-    _found = [_customGUI standardButton:@"Not Found"];
+    _found = [[_sharedDelegate customGUI] standardButton:@"Not Found"];
     _found.frame = CGRectMake(50, 400, self.view.frame.size.width-100, 30);
     _addToWatchList = nil;
     [self.addToWatchList removeFromSuperview];
@@ -156,6 +110,55 @@
     searchResults.theData = _data;
     searchResults.nameOfCompany = _companyStockLogo.text;
     [_sharedDelegate.navController pushViewController:searchResults animated:YES];
+}
+-(void)setup{
+    _pageTitle = [[_sharedDelegate customGUI] defaultLabel:@"Search"];
+    _pageTitle.frame = CGRectMake(0, 50, self.view.frame.size.width, 40);
+    
+    _hint = [[_sharedDelegate customGUI] defaultLabel:@"Not case sensitive"];
+    _hint.textColor = [UIColor lightGrayColor];
+    _hint.frame = CGRectMake(100, 97, self.view.frame.size.width-200, 15);
+    _hint.adjustsFontSizeToFitWidth = YES;
+    
+    _hint2 = [[_sharedDelegate customGUI] defaultLabel:@"Warning change data source on own terms"];
+    _hint2.textColor = [UIColor lightGrayColor];
+    _hint2.frame = CGRectMake(0, 115, self.view.frame.size.width, 25);
+    _hint2.adjustsFontSizeToFitWidth = YES;
+    
+    _data_source = [[_sharedDelegate customGUI] defaultTextFieldWithText:@"WIKI"];
+    _data_source.frame = CGRectMake(70, 150, self.view.frame.size.width-140, 30);
+    
+    _companyStockLogo = [[_sharedDelegate customGUI] defaultTextField:@"Company Stock Name"];
+    _companyStockLogo.frame = CGRectMake(70, 200, self.view.frame.size.width-140, 30);
+    
+    _startDate = [[_sharedDelegate customGUI] defaultTextField:@"Start Date"];
+    _startDate.frame = CGRectMake(70, 250, self.view.frame.size.width-140, 30);
+    
+    
+    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+    [DateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString* todaysDate = [DateFormatter stringFromDate:[NSDate date]];
+    _endDate = [[_sharedDelegate customGUI] defaultTextFieldWithText:todaysDate];
+    _endDate.frame = CGRectMake(70, 300, self.view.frame.size.width-140, 30);
+    
+    _searchButton = [[_sharedDelegate customGUI] defaultButton:@"search"];
+    _searchButton.frame = CGRectMake(100, 350, self.view.frame.size.width-200, 30);
+    [_searchButton addTarget:self action:@selector(searchResult:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:_hint2];
+    [self.view addSubview:_hint];
+    [self.view addSubview:_startDate];
+    [self.view addSubview:_endDate];
+    [self.view addSubview:_data_source];
+    [self.view addSubview:_companyStockLogo];
+    [self.view addSubview:_searchButton];
+    [self.view addSubview:_pageTitle];
+    
+    [self addConstraints];
+    
+}
+-(void)addConstraints{
+    NSDictionary *set = NSDictionaryOfVariableBindings(_hint, _hint2, _startDate, _endDate, _companyStockLogo, _data_source, _pageTitle, _searchButton);
 }
 
 @end

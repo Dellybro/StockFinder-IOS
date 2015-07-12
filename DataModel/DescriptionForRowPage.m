@@ -8,12 +8,10 @@
 
 #import "DescriptionForRowPage.h"
 #import "AppDelegate.h"
-#import "CustomGUI.h"
 
 @interface DescriptionForRowPage ()
 
 @property AppDelegate *sharedDelegate;
-@property CustomGUI *customGUI;
 
 
 @end

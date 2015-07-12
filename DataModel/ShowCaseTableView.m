@@ -8,13 +8,11 @@
 
 #import "ShowCaseTableView.h"
 #import "AppDelegate.h"
-#import "CustomGUI.h"
 #import "StaticCell.h"
 #import "DescriptionForRowPage.h"
 
 @interface ShowCaseTableView ()
 @property AppDelegate *sharedDelegate;
-@property CustomGUI *customGUI;
 @property (strong, nonatomic) UISearchController *searchController;
 
 @end
@@ -30,7 +28,6 @@
     _ShownData = (NSMutableArray*)_theData;
     _titlesOfRow = [[NSMutableArray alloc] initWithObjects:@"Open", @"High", @"Low", @"Close", @"Volume", @"Dividends", @"DPC", @"Open", @"High", @"Low", @"Close", @"Volume", nil];
     _sharedDelegate = [[UIApplication sharedApplication] delegate];
-    _customGUI = [[CustomGUI alloc] init];
     _meaningforRow = [[NSMutableArray alloc] init];
     
     for (int x = 0; x < 13; x++) {
@@ -104,7 +101,7 @@
     StaticCell *cell = (StaticCell*)[self.tableView cellForRowAtIndexPath:indexPath];
     DescriptionForRowPage *descriptionPage =[[DescriptionForRowPage alloc] init];
     
-    descriptionPage.meaning = [_customGUI defaultLabel:cell.meaningForRow];
+    descriptionPage.meaning = [[_sharedDelegate customGUI] defaultLabel:cell.meaningForRow];
     
     [_sharedDelegate.navController pushViewController:descriptionPage animated:YES];
 }

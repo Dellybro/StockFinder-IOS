@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
-
 @end
 
 @implementation AppDelegate
@@ -19,6 +18,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    _customGUI = [[CustomGUI alloc] init];
+    
     _topTenNames = [NSMutableArray arrayWithObjects:@"AAPL", @"RAI", @"EHTH", @"VSAR", @"CFI", @"ABG", @"ARRS", @"ARW", @"HCC", @"ASNA", nil];
     _topTen = [[NSMutableArray alloc] init];
     _userWatchList = [[NSMutableArray alloc] init];
@@ -26,9 +27,7 @@
     _helper = [[HTTPHelper alloc] init];
     
     //Date Formatter
-    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
-    [DateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSString* todaysDate = [DateFormatter stringFromDate:[NSDate date]];
+    NSString* todaysDate = [_customGUI todaysDate];
     for (int x = 0; x < _topTenNames.count; x++) {
         
         NSMutableArray *companyInfo = [self.helper find_company:@"WIKI" for:[_topTenNames objectAtIndex:x] startDate:@"2015-06-01" endDate:todaysDate];
@@ -39,7 +38,6 @@
         }
     }
     _rootView = [[HomePage alloc] init];
-    _topController = [[TopRated alloc] init];
     _navController = [[UINavigationController alloc] initWithRootViewController:_rootView];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -89,29 +87,6 @@
     }
     
 }
-//-(void)updateDatesOfEndDateToToday{
-//    //Today Date
-//    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
-//    [DateFormatter setDateFormat:@"yyyy-MM-dd"];
-//    NSString* todaysDate = [DateFormatter stringFromDate:[NSDate date]];
-//    //Start
-//    NSManagedObjectContext *context = [self managedObjectContext];
-//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User"
-//                                              inManagedObjectContext:context];
-//    NSError *error;
-//    [fetchRequest setEntity:entity];
-//    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-//    
-//    int index = 0;
-//    for (NSManagedObject *info in fetchedObjects) {
-//        NSMutableDictionary* stock = [info valueForKey:@"stocks"];
-//        [stock setValue:todaysDate forKey:@"endDate"];
-//        NSManagedObject* updatedStock = [fetchedObjects objectAtIndex:index];
-//        [_userWatchList addObject:[info valueForKey:@"stocks"]];
-//        index++;
-//    }
-//}
 -(void)getUserStocklist{
     NSManagedObjectContext *context = [self managedObjectContext];
     

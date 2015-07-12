@@ -24,6 +24,15 @@
     return self;
 }
 
+//CustomMethods
+-(NSString*)todaysDate{
+    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+    [DateFormatter setDateFormat:@"yyyy-MM-dd"];
+    return [DateFormatter stringFromDate:[NSDate date]];
+}
+
+//CustomGUI
+
 -(UITextField*)defaultTextField:(NSString*)placeHolder{
     UITextField* textField = [[UITextField alloc] init];
     textField.layer.borderWidth = 1.0f;

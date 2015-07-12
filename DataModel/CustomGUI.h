@@ -27,4 +27,7 @@
 @property UIPickerView* statePicker;
 @property NSString* stateString;
 
+
+-(NSString*)todaysDate;
+
 @end

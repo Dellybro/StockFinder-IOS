@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Travis Delly. All rights reserved.
 //
 
-#import "CustomGUI.h"
 #import "AppDelegate.h"
 #import "TopRated.h"
 #import "SearchPage.h"
@@ -17,7 +16,6 @@
 @interface TopRated ()
 
 @property AppDelegate *sharedDelegate;
-@property CustomGUI *customGUI;
 
 @end
 
@@ -29,8 +27,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    _customGUI = [[CustomGUI alloc] init];
     _sharedDelegate = [[UIApplication sharedApplication] delegate];
     
     [self setup];
@@ -89,7 +85,7 @@
     
     //Header and stuff
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 75)];
-    _header = [_customGUI defaultLabel:@"Top Ten"];
+    _header = [[_sharedDelegate customGUI] defaultLabel:@"Top Ten"];
     _header.textColor = [UIColor whiteColor];
     _header.frame = CGRectMake(0, 10, self.view.frame.size.width, 35);
     _header.adjustsFontSizeToFitWidth = YES;

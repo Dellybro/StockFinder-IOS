@@ -9,13 +9,11 @@
 #import "WatchList.h"
 #import "StaticCell.h"
 #import "AppDelegate.h"
-#import "CustomGUI.h"
 #import "ShowCaseTableView.h"
 
 @interface WatchList ()
 
 @property AppDelegate *sharedDelegate;
-@property CustomGUI *customGUI;
 
 @end
 
@@ -30,9 +28,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     _sharedDelegate = [[UIApplication sharedApplication] delegate];
-    _customGUI = [[CustomGUI alloc] init];
     
     [self setup];
 }
@@ -96,7 +92,7 @@
 -(void)setup{
     //Header and stuff
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 75)];
-    _header = [_customGUI defaultLabel:@"Watch List"];
+    _header = [[_sharedDelegate customGUI] defaultLabel:@"Watch List"];
     _header.textColor = [UIColor whiteColor];
     _header.frame = CGRectMake(0, 10, self.view.frame.size.width, 35);
     _header.adjustsFontSizeToFitWidth = YES;
